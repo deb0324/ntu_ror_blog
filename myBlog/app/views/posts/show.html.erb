@@ -1,0 +1,18 @@
+<%= render 'shared/title', title: @post.title %>
+<div class "row">
+  <div class="col-md-8 well">
+    <h3><%= @post.title%></h3>
+    <p>
+      <%= @post.content%>
+    </p>
+  </div>
+</div>
+
+<% @post.comments.each do |comment|%>
+  <div class="col-md-6 well">
+    <p>
+      <%= comment.content%>
+    </p>
+  </div>
+<% end %>
+<%= link_to 'back to all posts', posts_path %>
