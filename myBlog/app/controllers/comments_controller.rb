@@ -3,7 +3,8 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.create(comment_params)
+    @comment = Comment.create(comment_params)
+    @post.comments << @comment
 
 
     if @comment.save!
