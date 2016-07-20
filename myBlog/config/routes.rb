@@ -6,6 +6,14 @@ Rails.application.routes.draw do
 
   resources :comments
   resources :categories
+  resources :users
+
+  # TODO: which one to use??
+
+  resources :sessions
+  get '/login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy' #TODO: why not delete??
   
 
   #get '/index' => 'posts#index'

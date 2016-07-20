@@ -1,0 +1,10 @@
+<%= render 'shared/title', title: 'Sign in'%>
+
+<div>
+  <%= form_for(:session, url: login_path) do |f| %>
+    <p><%= f.text_field :name, :placeholder => "Name" %></p>
+    <p><%= f.password_field :password, :placeholder => "Password" %></p>
+    <%= f.submit "Log in", class: "btn btn-primary" %>
+    <%= link_to "Sign up", new_user_path, class: "btn btn-primary"%>
+  <% end %>
+</div>
