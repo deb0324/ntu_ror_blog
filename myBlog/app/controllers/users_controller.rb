@@ -8,6 +8,9 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def show
+    @user = User.find(session[:user_id])
+  end
   def create
     @user = User.create(user_params)
 
@@ -19,8 +22,7 @@ class UsersController < ApplicationController
     end
   end
 
-
   def user_params
-    params.require(:user).permit(:name, :password)
+    params.require(:user).permit(:username, :password, :nickname)
   end
 end

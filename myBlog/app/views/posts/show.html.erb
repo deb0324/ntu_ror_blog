@@ -1,23 +1,16 @@
 <%= render 'shared/title', title: @post.title %>
-<div class="row">
-  <div>
-    <div class="col-md-8 well">
-      <h3><%= @post.title%></h3>
-      <p>
-        <%= @post.content%>
-      </p>
-      <p><%= @post.created_at.strftime("%b %d, %Y") %></p>
-      <%= link_to "Edit Post", edit_post_path(@post.id) %> 
-    </div>
-  </div>
+<div>
+    <%= render 'post', post: @post, show: true %>
+</div>
+<div>
   <% @post.comments.each do |comment|%>
-    <div class="col-md-8 well">
+    <div class="col-md-7 well">
       <p><%= comment.content%></p>
       <p><%= comment.created_at.strftime("%b %d, %Y") %></p>
     </div>
     <br>
   <% end %>
-  <div class="col-md-8 well" >
+  <div class="col-md-7 well" >
     <!-- TODO: how this form_for works? -->
     <%= form_for [@post, @comment] do |f| %>
       <p><%= f.text_area :content %></p>

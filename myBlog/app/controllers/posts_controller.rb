@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_action :require_user, only:[:show]
+  before_action :require_user, only:[:edit, :update]
   def index
     @posts = Post.all
   end
@@ -17,6 +17,7 @@ class PostsController < ApplicationController
 
   def create
     post = Post.new(post_params)
+    post.user = current_user
 
     if post.save!
       redirect_to posts_path
@@ -36,6 +37,24 @@ class PostsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+
+    #delete post
+    @post = Post.find(params[:format]) # TODO: why format? how to get id?
+    @post.destroy
+
+    #delete all comments associated with post
+    @comments = @post.comments
+    @comments.each do |comment|
+      comment.destroy
+    end
+    redirect_to posts_path
+  end
+
+  def author?
+    current_user == Post.find(param[:id]).user # TODO: how to get current post??
   end
 
   private
