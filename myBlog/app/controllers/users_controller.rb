@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # TODO: Fix this..
   def author?
     binding.pry
     current_user == Post.find(param[:id]).user # TODO: how to get current post??

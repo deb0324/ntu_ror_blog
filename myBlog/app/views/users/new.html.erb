@@ -1,9 +1,22 @@
 <%= render 'shared/title', title: 'Sign up'%>
+<div role="form" style="width: 700px;">
+  <%= form_for(@user) do |f| %>
+    <div class="form-group">
+      <label>Username</label>
+      <p><%= f.text_field :username, :placeholder => "username", class: "form-control" %></p>
+    </div>
 
-<%= form_for(@user) do |f| %>
-  <p><%= f.text_field :username, :placeholder => "username" %></p>
-  <p><%= f.text_field :nickname, :placeholder => "nickname" %></p>
-  <p><%= f.password_field :password, :placeholder => "password" %></p>
-  <%= f.submit class: "btn btn-primary" %>
+    <div class="form-group">
+      <label>Nickname</label>
+      <p><%= f.text_field :nickname, :placeholder => "nickname", class: "form-control" %></p>
+    </div>
 
-<% end %>
+    <div class="form-group">
+    <label>Password</label>
+    <p><%= f.password_field :password, :placeholder => "password", class: "form-control" %></p>
+    </div>
+
+    <%= f.submit class: "btn btn-primary" %>
+
+  <% end %>
+</div>

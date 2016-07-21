@@ -2,11 +2,17 @@
   <div class="well col-md-6">
     <p><h4><u><%= post.title %></u></h4></p>
     <p><%= post.content %></p>
-    <p><%= post.created_at.strftime("%b %d, %Y") %> by 
-      <% if post.user != nil %>
-      <%= post.user[:nickname] %></p>
-      <% end %>
     <p><%= post.comments.size %> comments </p>
+
+    <small><p><%= post.created_at.strftime("%b %d, %Y") %>  
+      <% if post.user != nil %>
+        <!-- TODO: fix this
+        <%= link_to post.user[:nickname], user_path(post.user) %>
+        -->
+        by <%= post.user[:nickname] %>
+      <% end %>
+    </p></small>
+    
     <p>
       <% post.categories.each do |category| %>
         <span class="btn btn-danger"><%= link_to category.title, category_path(category), {:style=>'color: white;'} %></span>

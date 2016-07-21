@@ -9,9 +9,13 @@
 </div>
 
 <div class="col-md-7 well" >
-  <!-- TODO: how this form_for works? -->
-  <%= form_for [@post, @comment] do |f| %>
-    <p><%= f.text_area :content %></p>
-  <%= f.submit class: 'btn btn-primary' %>
+  <% if !current_user %>
+    <p><small>please log in to comment</small></p>
+  <% else %>
+    <!-- TODO: how this form_for works? -->
+    <%= form_for [@post, @comment] do |f| %>
+      <p><%= f.text_area :content %></p>
+      <%= f.submit class: 'btn btn-primary' %>
+    <% end %>
   <% end %>
 </div>
