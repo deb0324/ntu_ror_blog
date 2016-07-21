@@ -9,10 +9,12 @@
 <br> <!-- TODO: Fix this -->
 </div>
 
-<% @categories.reverse.each do |category| %>
-<div class="row">
-  <div class="well col-md-6">
-    <h5><%= link_to category.title, category_path(category) %></h5>
+<div>
+  <% @categories.reverse.each do |category| %>
+  <div class="row">
+    <div class="well col-md-6">
+      <h5><%= link_to category.title, category_path(category) %> <span style="float:right;"><%= category.posts.size %> posts</span></h5>
+    </div>
   </div>
+  <% end %>
 </div>
-<% end %>

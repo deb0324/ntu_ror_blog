@@ -12,4 +12,13 @@ class ApplicationController < ActionController::Base
   def require_user
     redirect_to login_path unless current_user
   end
+
+  def author?
+    binding.pry
+    current_user == Post.find(param[:id]).user # TODO: how to get current post??
+  end
+  
+  def require_author
+    redirect_to login_path unless current_user.author?
+  end
 end

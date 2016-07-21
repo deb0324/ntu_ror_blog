@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 
-  before_action :require_user, only:[:edit, :update]
+  before_action :require_user, only:[:new, :create, :edit, :update, :destroy]
+  #before_action :require_author, only:[:edit, :update, :destroy]
   def index
     @posts = Post.all
   end
@@ -51,10 +52,6 @@ class PostsController < ApplicationController
       comment.destroy
     end
     redirect_to posts_path
-  end
-
-  def author?
-    current_user == Post.find(param[:id]).user # TODO: how to get current post??
   end
 
   private

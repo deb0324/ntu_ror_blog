@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(session[:user_id])
   end
+
   def create
     @user = User.create(user_params)
 
@@ -21,6 +22,12 @@ class UsersController < ApplicationController
       redirect_to :new
     end
   end
+
+  def author?
+    binding.pry
+    current_user == Post.find(param[:id]).user # TODO: how to get current post??
+  end
+  private
 
   def user_params
     params.require(:user).permit(:username, :password, :nickname)
