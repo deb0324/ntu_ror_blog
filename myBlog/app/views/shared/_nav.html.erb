@@ -40,9 +40,11 @@
 
       <li class="nav-item"><%= link_to 'Categories', categories_path, {:style=>'color: white;'} %></li>
     
-      
-      <li class="nav-item" style="border-right: none; float:right;"><%= link_to 'Sign in', new_session_path, {:style=>'color: white;'} %></li>
-      
+      <% if current_user %>
+        <li class="nav-item" style="border-right: none; float:right;"><%= link_to 'Sign out', logout_path, {:style=>'color: white;'} %></li>
+      <% else %>
+        <li class="nav-item" style="border-right: none; float:right;"><%= link_to 'Sign in', new_session_path, {:style=>'color: white;'} %>
+      <% end %>
     </ul>
   </div>
   <hr style = "color: grey">
