@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = Comment.create(comment_params)
     @post.comments << @comment
+    @comment.user = current_user
 
 
     if @comment.save!

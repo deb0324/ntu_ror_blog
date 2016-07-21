@@ -4,17 +4,14 @@
 </div>
 <div>
   <% @post.comments.each do |comment|%>
-    <div class="col-md-7 well">
-      <p><%= comment.content%></p>
-      <p><%= comment.created_at.strftime("%b %d, %Y") %></p>
-    </div>
-    <br>
+    <%= render 'comments/comment', comment: comment %>
   <% end %>
-  <div class="col-md-7 well" >
-    <!-- TODO: how this form_for works? -->
-    <%= form_for [@post, @comment] do |f| %>
-      <p><%= f.text_area :content %></p>
-    <%= f.submit class: 'btn btn-primary' %>
-    <% end %>
-  </div>
+</div>
+
+<div class="col-md-7 well" >
+  <!-- TODO: how this form_for works? -->
+  <%= form_for [@post, @comment] do |f| %>
+    <p><%= f.text_area :content %></p>
+  <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
 </div>
