@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   resources :users
 
   # TODO: which one to use??
-
   resources :sessions
   get '/login' => 'sessions#new'
   post 'login' => 'sessions#create'

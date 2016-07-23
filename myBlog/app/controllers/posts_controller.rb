@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
 
-  before_action :require_user, only:[:new, :create, :edit, :update, :destroy]
-  #before_action :require_author, only:[:edit, :update, :destroy]
+  #before_action :require_user, only:[:new, :create, :edit, :update, :destroy]
+  before_action :require_user, only:[:new, :create]
+  before_action :require_author, only:[:edit, :update, :destroy]
   def index
     @posts = Post.all
   end
@@ -9,7 +10,6 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
-    #@comments = @post.comments
   end
 
   def new
@@ -17,9 +17,23 @@ class PostsController < ApplicationController
   end
 
   def create
+    binding.pry
     post = Post.new(post_params)
     post.user = current_user
 
+    # Category logic
+    all_cat = Category.all.pluck(:title)
+    user_cat = post_params[:categories].split(",")
+
+    (all_cat & user_cat).each do |cat|
+      post.categories << Category.create(title: cat)
+    end
+
+    (all_cat - user_cat).each do |cat|
+      post.categories << Category.find_by_title(cat)
+    end
+    ##
+    
     if post.save!
       redirect_to posts_path
     else
@@ -56,7 +70,11 @@ class PostsController < ApplicationController
 
   private
 
+  def author?
+    current_user == Post.find(params[:id]).user
+  end
+
   def post_params
-    params.require(:post).permit(:title, :content, category_ids: [])
+    params.require(:post).permit(:title, :content, :categories)
   end
 end

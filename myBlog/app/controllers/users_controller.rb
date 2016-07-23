@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(session[:user_id])
+    @user = User.find(params[:id])
   end
 
   def create
@@ -23,11 +23,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # TODO: Fix this..
-  def author?
-    binding.pry
-    current_user == Post.find(param[:id]).user # TODO: how to get current post??
-  end
+
   private
 
   def user_params

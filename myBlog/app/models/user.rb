@@ -3,6 +3,12 @@ class User < ActiveRecord::Base
   has_many :comments
 
   has_secure_password
+
+  def author?(id)
+    #binding.pry
+    self == Post.find(id).user
+  end
+
   #validates :name, presence: true
   #validates :name, length: { minimum: 2 }
   #validates :name, length: { maximum: 10 }
