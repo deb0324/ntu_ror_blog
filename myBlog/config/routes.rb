@@ -1,6 +1,23 @@
 Rails.application.routes.draw do
 
-  get 'users/' => 'users#index'
+  resources :posts do
+    resources :comments
+  end
+
+  resources :comments
+  resources :categories
+  resources :users
+
+  # TODO: which one to use??
+  resources :sessions
+  get '/login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy' #TODO: why not delete??
+  
+  get '/delete' => 'posts#destroy'
+
+  #get '/index' => 'posts#index'
+
     # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
