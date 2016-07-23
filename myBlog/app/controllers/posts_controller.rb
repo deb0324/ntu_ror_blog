@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    binding.pry
+    #binding.pry
     post = Post.new(post_params)
     post.user = current_user
 
@@ -55,7 +55,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-
+    #binding.pry
     #delete post
     @post = Post.find(params[:format]) # TODO: why format? how to get id?
     @post.destroy
@@ -69,10 +69,6 @@ class PostsController < ApplicationController
   end
 
   private
-
-  def author?
-    current_user == Post.find(params[:id]).user
-  end
 
   def post_params
     params.require(:post).permit(:title, :content, :categories)
